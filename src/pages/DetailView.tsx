@@ -254,29 +254,25 @@ export default function DetailView() {
             <span>{formatDate(captureDate)}</span>
           </div>
 
-          {itemCount > 1 && (
-            <>
-              <button
-                className={`${styles.cycleButton} ${styles.previousButton}`}
-                type="button"
-                onClick={() => navigateToItem(previousIndex)}
-                aria-label="View previous item"
-              >
-                <span aria-hidden="true">←</span>
-                <span>Previous</span>
-              </button>
+          <button
+            className={`${styles.cycleButton} ${styles.previousButton}`}
+            type="button"
+            onClick={() => navigateToItem(previousIndex)}
+            aria-label="View previous item"
+          >
+            <span aria-hidden="true">←</span>
+            <span>Previous</span>
+          </button>
 
-              <button
-                className={`${styles.cycleButton} ${styles.nextButton}`}
-                type="button"
-                onClick={() => navigateToItem(nextIndex)}
-                aria-label="View next item"
-              >
-                <span>Next</span>
-                <span aria-hidden="true">→</span>
-              </button>
-            </>
-          )}
+          <button
+            className={`${styles.cycleButton} ${styles.nextButton}`}
+            type="button"
+            onClick={() => navigateToItem(nextIndex)}
+            aria-label="View next item"
+          >
+            <span>Next</span>
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
 
         <div className={styles.contentPanel}>
@@ -350,18 +346,16 @@ export default function DetailView() {
         </aside>
       </section>
 
-      {itemCount > 1 && (
-        <nav className={styles.bottomCycler} aria-label="Browse nearby items">
-          <button type="button" onClick={() => navigateToItem(previousIndex)}>
-            <span aria-hidden="true">←</span>
-            <span><small>Previous</small>{itemTitle(previousItem)}</span>
-          </button>
-          <button type="button" onClick={() => navigateToItem(nextIndex)}>
-            <span><small>Next</small>{itemTitle(nextItem)}</span>
-            <span aria-hidden="true">→</span>
-          </button>
-        </nav>
-      )}
+      <nav className={styles.bottomCycler} aria-label="Browse nearby items">
+        <button type="button" onClick={() => navigateToItem(previousIndex)}>
+          <span aria-hidden="true">←</span>
+          <span><small>Previous</small>{itemTitle(previousItem)}</span>
+        </button>
+        <button type="button" onClick={() => navigateToItem(nextIndex)}>
+          <span><small>Next</small>{itemTitle(nextItem)}</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </nav>
     </main>
   )
 }

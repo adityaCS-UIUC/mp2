@@ -40,17 +40,8 @@ export default function ListView() {
     void loadImages()
   }, [loadImages])
 
-  const visibleItems = useMemo(() => {
-    const normalizedFilter = filterText.trim().toLowerCase()
-
-    return items
-      .filter((item) => {
-        if (!normalizedFilter) return true
-
-        return item.title.toLowerCase().includes(normalizedFilter) ||
-          item.description.toLowerCase().includes(normalizedFilter)
-      })
-      .sort((firstItem, secondItem) => {
+  const sortedItems = useMemo(() => {
+    return [...items].sort((firstItem, secondItem) => {
         const comparison = sortProperty === 'title'
           ? firstItem.title.localeCompare(secondItem.title)
           : new Date(firstItem.dateCreated).getTime() -
@@ -58,7 +49,17 @@ export default function ListView() {
 
         return sortOrder === 'asc' ? comparison : -comparison
       })
-  }, [filterText, items, sortOrder, sortProperty])
+  }, [items, sortOrder, sortProperty])
+
+  const visibleItems = useMemo(() => {
+    const normalizedFilter = filterText.trim().toLowerCase()
+    if (!normalizedFilter) return sortedItems
+
+    return sortedItems.filter((item) => {
+      return item.title.toLowerCase().includes(normalizedFilter) ||
+        item.description.toLowerCase().includes(normalizedFilter)
+    })
+  }, [filterText, sortedItems])
 
   function toggleSortOrder() {
     setSortOrder((currentOrder) => currentOrder === 'asc' ? 'desc' : 'asc')
@@ -159,11 +160,11 @@ export default function ListView() {
         </div>
       ) : (
         <section className={styles.list} aria-label="NASA image search results">
-          {visibleItems.map((item, index) => {
+          {visibleItems.map((item) => {
             const detailState: DetailState = {
               kind: 'library',
-              items: visibleItems,
-              index,
+              items: sortedItems,
+              index: sortedItems.findIndex((candidate) => candidate.id === item.id),
             }
 
             return (

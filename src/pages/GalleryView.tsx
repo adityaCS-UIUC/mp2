@@ -94,12 +94,15 @@ export default function GalleryView() {
     void loadPhotos()
   }, [loadPhotos])
 
+  const roverPhotos = useMemo(() => {
+    return photos.filter(
+      (photo) => photo.roverName.toLowerCase() === selectedRover,
+    )
+  }, [photos, selectedRover])
+
   const visiblePhotos = useMemo(() => {
-    return photos.filter((photo) => {
-      const roverMatches = photo.roverName.toLowerCase() === selectedRover
-      return roverMatches && matchesCamera(photo, selectedCamera)
-    })
-  }, [photos, selectedCamera, selectedRover])
+    return roverPhotos.filter((photo) => matchesCamera(photo, selectedCamera))
+  }, [roverPhotos, selectedCamera])
 
   const availableCameraOptions = useMemo(() => {
     return cameraOptions.filter((option) => {
@@ -218,11 +221,11 @@ export default function GalleryView() {
 
       {!isLoading && !errorMessage && visiblePhotos.length > 0 && (
         <section className={styles.grid} aria-label={`${activeRoverLabel} rover photos`}>
-          {visiblePhotos.map((photo, index) => {
+          {visiblePhotos.map((photo) => {
             const detailState: DetailState = {
               kind: 'rover',
-              items: visiblePhotos,
-              index,
+              items: roverPhotos,
+              index: roverPhotos.findIndex((candidate) => candidate.id === photo.id),
             }
 
             return (
