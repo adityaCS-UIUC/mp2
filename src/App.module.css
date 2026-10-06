@@ -1,0 +1,59 @@
+.app {
+  position: relative;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(5, 8, 19, 0.12) 0%, #080b16 78rem),
+    #080b16;
+  color: #f7f8ff;
+  isolation: isolate;
+}
+
+.app::before,
+.app::after {
+  position: fixed;
+  z-index: -2;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+}
+
+.app::before {
+  background-image: url('./assets/cosmic-backdrop.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 104% auto;
+  opacity: 0.68;
+  animation: orbitalDrift 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.app::after {
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(5, 8, 19, 0.05) 0%, rgba(8, 11, 22, 0.44) 54rem, #080b16 82rem),
+    linear-gradient(90deg, rgba(4, 7, 17, 0.2), rgba(4, 7, 17, 0.76) 28%, rgba(4, 7, 17, 0.76) 72%, rgba(4, 7, 17, 0.2));
+}
+
+@keyframes orbitalDrift {
+  from {
+    transform: scale(1.015) translate3d(-0.35%, 0, 0);
+  }
+
+  to {
+    transform: scale(1.045) translate3d(0.35%, -0.6%, 0);
+  }
+}
+
+@media (max-width: 900px) {
+  .app::before {
+    background-position: 32% top;
+    background-size: auto 54rem;
+    opacity: 0.36;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app::before {
+    animation: none;
+  }
+}
