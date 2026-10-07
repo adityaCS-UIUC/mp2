@@ -8,6 +8,8 @@
 4. [Rules](#rules)
 5. [Getting Started](#getting-started)
 6. [Submission Details](#submission-details)
+7. [Project Overview](#project-overview)
+   - [Main Features](#main-features)
 
 ## Assignment
 
@@ -149,3 +151,27 @@ git push origin main
 We acknowledge the transformative potential of LLMs in generating code; however, we are still in the nascent stages of understanding how to embed LLMs in developer workflows to write code more efficiently while maintaining quality. Therefore, we will not be teaching students directly how to use LLMs to develop web applications.
 
 As part of this class, we do encourage students to experiment with LLM services such as OpenAI's ChatGPT to generate source code for MPs. If LLMs are used to generate code for an MP, students must (1) submit their chatlogs along with their source code, and (2) answer survey questions related to their experience using LLMs in the grading form. Failure to do this will be a violation of the academic integrity policy of this course.
+
+## Project Overview
+
+**Aditya's Cosmic Atlas** is a responsive single-page React application that allows users to explore imagery from NASA's public archives and photographs captured by Mars rovers.
+
+The application provides three connected experiences. The Search Library presents NASA archive records in a searchable and sortable list. The Mars Gallery displays rover photographs that can be filtered by rover and camera type. The Details View presents expanded information about a selected record and provides Previous and Next controls for navigating through the collection.
+
+**Live Application:** [Aditya's Cosmic Atlas](https://adityacs-uiuc.github.io/mp2/)
+
+### Main Features
+
+- Displays records from the NASA Image and Video Library
+- Filters library records as the user types
+- Sorts results by title or capture date
+- Supports ascending and descending sorting
+- Displays a gallery of Mars rover photographs
+- Filters gallery photographs by rover and camera type
+- Opens list and gallery items in dedicated detail routes
+- Provides Previous and Next navigation between detail records
+- Supports direct access to deployed detail URLs
+- Includes responsive layouts for desktop and mobile screens
+- Provides loading, empty, error, cached, and fallback states
+- Uses local fallback records when NASA services are unavailable
+- Caches common API responses to reduce repeated requests
